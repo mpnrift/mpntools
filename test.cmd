@@ -1,1 +1,1 @@
-py.test test.py -v
+py.test test/test_mpntools.py -v
