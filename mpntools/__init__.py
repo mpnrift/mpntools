@@ -17,15 +17,8 @@ def get_substr(string, delim1, delim2, strip=True):
     if not string or string == '':
         return None
 
-    de1 = ''
-    de2 = ''
-
-    if delim1:
-        de1 = delim1
-
-    if delim2:
-        de2 = delim2
-
+    de1 = delim1 if delim1 else ''
+    de2 = delim2 if delim2 else ''
     res = re.search(de1 + '(.*)' + de2, string)
 
     if not res:
@@ -60,8 +53,6 @@ def get_nested_val(data, nested_key):
         if i == len(ds) - 1:
             if ds[i] in d_tmp:
                 return d_tmp[ds[i]], True
-
-            return None, False
 
         else:
             if ds[i] in d_tmp:
