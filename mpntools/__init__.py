@@ -1,7 +1,7 @@
 import re
 
 
-def get_substr_mid(string, delim1, delim2, strip=True):
+def get_substr(string, delim1, delim2, strip=True):
     """
     Return the a substring of a string between delimiters delim1 and delim2.
     If either delimiter isn't given, return substring from start or until the
@@ -31,7 +31,7 @@ def get_substr_mid(string, delim1, delim2, strip=True):
     if not res:
         return None
 
-    ret = res.group(1)
+    ret = str(res.group(1))
 
     if strip:
         ret = ret.strip()

@@ -3,47 +3,47 @@ import mpntools as mpn
 
 
 ############################
-# Tests for get_substr_mid()
+# Tests for get_substr()
 ############################
 
 
-def test_get_substr_mid_normal():
-    ret = mpn.get_substr_mid('start middle end', 'start', 'end', strip=True)
+def test_get_substr_normal():
+    ret = mpn.get_substr('start middle end', 'start', 'end', strip=True)
     assert ret is not None
     assert ret == 'middle'
 
 
-def test_get_substr_mid_no_strip():
-    ret = mpn.get_substr_mid('start middle end', 'start', 'end', strip=False)
+def test_get_substr_no_strip():
+    ret = mpn.get_substr('start middle end', 'start', 'end', strip=False)
     assert ret is not None
     assert ret == ' middle '
 
 
-def test_get_substr_mid_start():
-    ret = mpn.get_substr_mid('start middle end', None, 'end', strip=True)
+def test_get_substr_start():
+    ret = mpn.get_substr('start middle end', None, 'end', strip=True)
     assert ret is not None
     assert ret == 'start middle'
 
 
-def test_get_substr_mid_end():
-    ret = mpn.get_substr_mid('start middle end', 'start', None, strip=True)
+def test_get_substr_end():
+    ret = mpn.get_substr('start middle end', 'start', None, strip=True)
     assert ret is not None
     assert ret == 'middle end'
 
 
-def test_get_substr_mid_no_result():
-    ret = mpn.get_substr_mid(
+def test_get_substr_no_result():
+    ret = mpn.get_substr(
         'start middle end', 'beginning', 'finish', strip=True)
     assert ret is None
 
 
-def test_get_substr_mid_no_string():
-    ret = mpn.get_substr_mid(None, 'start', 'end', strip=True)
+def test_get_substr_no_string():
+    ret = mpn.get_substr(None, 'start', 'end', strip=True)
     assert ret is None
 
 
-def test_get_substr_mid_empty_string():
-    ret = mpn.get_substr_mid('', 'start', 'end', strip=True)
+def test_get_substr_empty_string():
+    ret = mpn.get_substr('', 'start', 'end', strip=True)
     assert ret is None
 
 
