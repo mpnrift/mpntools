@@ -38,13 +38,65 @@ def test_get_substr_no_result():
 
 
 def test_get_substr_no_string():
-    ret = mpn.get_substr(None, 'start', 'end', strip=True)
-    assert ret is None
+    with pytest.raises(ValueError):
+        mpn.get_substr(None, 'start', 'end', strip=True)
 
 
 def test_get_substr_empty_string():
-    ret = mpn.get_substr('', 'start', 'end', strip=True)
+    with pytest.raises(ValueError):
+        mpn.get_substr('', 'start', 'end', strip=True)
+
+
+def test_get_substr_not_bool():
+    with pytest.raises(ValueError):
+        mpn.get_substr('string', 'start', 'end', strip='xyz')
+
+
+############################
+# Tests for get_substr_all()
+############################
+
+
+def test_get_substr_all_normal():
+    ret = mpn.get_substr_all(
+        'st b en st a en st c en', 'st', 'en', strip=True, sort=False)
+    assert ret == ['b', 'a', 'c']
+
+
+def test_get_substr_all_no_result():
+    ret = mpn.get_substr_all(
+        'st b en st a en', 'xx', 'yy', strip=False, sort=False)
     assert ret is None
+
+
+def test_get_substr_all_sort():
+    ret = mpn.get_substr_all(
+        'st b en st a en st c en', 'st', 'en', strip=True, sort=True)
+    assert ret == ['a', 'b', 'c']
+
+
+def test_get_substr_all_no_strip():
+    ret = mpn.get_substr_all(
+        'st b en st a en st c en', 'st', 'en', strip=False, sort=False)
+    assert ret == [' b ', ' a ', ' c ']
+
+
+def test_get_substr_all_no_string():
+    with pytest.raises(ValueError):
+        mpn.get_substr_all(
+            None, 'st', 'en', strip=False, sort=False)
+
+
+def test_get_substr_all_empty_string():
+    with pytest.raises(ValueError):
+        mpn.get_substr_all(
+            '', 'st', 'en', strip=False, sort=False)
+
+
+def test_get_substr_all_not_bool():
+    with pytest.raises(ValueError):
+        mpn.get_substr_all(
+            'string', 'st', 'en', strip='xyz', sort=False)
 
 
 ############################
@@ -67,27 +119,23 @@ def test_get_nested_val_no_level():
 
 
 def test_get_nested_val_empty_dict():
-    ret0, ret1 = mpn.get_nested_val({}, 'somekey')
-    assert ret0 is None
-    assert ret1 is False
+    with pytest.raises(ValueError):
+        mpn.get_nested_val({}, 'somekey')
 
 
 def test_get_nested_val_no_dict():
-    ret0, ret1 = mpn.get_nested_val(None, 'somekey')
-    assert ret0 is None
-    assert ret1 is False
+    with pytest.raises(ValueError):
+        mpn.get_nested_val(None, 'somekey')
 
 
 def test_get_nested_val_empty_key():
-    ret0, ret1 = mpn.get_nested_val({'level1': {'level2': 'val'}}, '')
-    assert ret0 is None
-    assert ret1 is False
+    with pytest.raises(ValueError):
+        mpn.get_nested_val({'level1': {'level2': 'val'}}, '')
 
 
 def test_get_nested_val_no_key():
-    ret0, ret1 = mpn.get_nested_val({'level1': {'level2': 'val'}}, None)
-    assert ret0 is None
-    assert ret1 is False
+    with pytest.raises(ValueError):
+        mpn.get_nested_val({'level1': {'level2': 'val'}}, None)
 
 
 def test_get_nested_val_null_value():

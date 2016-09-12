@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mpntools',
-    version='0.1.1',
+    version='0.2.0',
     description='General purpose Python helper functions',
     url='',
     author='mpnrift',
